@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <Header />
-    <Todos v-bind:todos="todos" />
+    <Header v-on:createtodo="createtodo" />
+    <Todos v-bind:todos="todos" v-on:deletetodo="deletetodo" />
   </div>
 </template>
 
@@ -12,11 +12,13 @@ import Todos from './components/Todos';
 let todos = [
   {
     id: "1",
-    name: "Complete assignments"
+    name: "Complete assignments",
+    done: false
   },
   {
     id: "2",
-    name: "Study Vue.js"
+    name: "Study Vue.js",
+    done: true
   }
 ]
 
@@ -30,11 +32,27 @@ export default {
     return {
       todos
     }
+  },
+  methods: {
+    createtodo: function (todo) {
+      let todoObject = {
+        id: `${todos.length + 1}`,
+        name: todo,
+        done: false
+      }
+      
+      todos.push(todoObject);
+    },
+     deletetodo: function (id) {
+       const index = todos.indexOf(id);
+       todos.splice(index-1, 1);
+     }
   }
 }
 </script>
 
 <style lang="scss">
+
 body {
   margin: 0;
   padding: 0;
