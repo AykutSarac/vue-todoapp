@@ -1,6 +1,6 @@
 <template>
     <header>
-        <input type="text" name="todoInput" v-model="todoValue" id="todoInput" placeholder="What are you going to do?">
+        <input type="text" name="todoInput" v-model="todoValue" id="todoInput" placeholder="What are you going to do?" @keyup.enter="createtodo(todoValue)">
         <button class="submit" v-on:click="createtodo(todoValue)">+</button>
     </header>
 </template>

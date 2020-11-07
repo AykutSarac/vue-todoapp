@@ -36,16 +36,15 @@ export default {
   methods: {
     createtodo: function (todo) {
       let todoObject = {
-        id: `${todos.length + 1}`,
+        id: `${Math.floor(Math.random() * 1000000)}`,
         name: todo,
         done: false
       }
-      
-      todos.push(todoObject);
+
+      this.todos.push(todoObject);
     },
      deletetodo: function (id) {
-       const index = todos.indexOf(id);
-       todos.splice(index-1, 1);
+       this.todos = this.todos.filter(todo => todo.id != id);
      }
   }
 }

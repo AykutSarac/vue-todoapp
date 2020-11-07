@@ -1,13 +1,12 @@
 <template>
     <section id="todos">
         <div class="todo" v-for="(todo, key) in todos" :key="key">
-            <label>
-                <input type="checkbox" name="done" v-if="todo.done" checked>
-                    <input type="checkbox" name="done" v-else>
-                    <p style="text-decoration: line-through;" v-if="todo.done">{{ todo.name }}</p>
-                    <p v-else>{{ todo.name }}</p>
+            <input type="checkbox" name="done" v-if="todo.done" checked>
+            <input type="checkbox" name="done" v-else>
+            <label for="do">
+                {{ todo.name }}
             </label>
-            <button class="todoTrash" v-on:click="deletetodo(todo)"><i class="fas fa-trash-alt"></i></button> 
+            <button class="todoTrash" v-on:click="() => deletetodo(todo.id)"><i class="fas fa-trash-alt"></i></button> 
         </div>
     </section>
 </template>
@@ -17,8 +16,9 @@ export default {
     name: "Todos",
     props: ["todos"],
     methods: {
-        deletetodo: function (todo) {
-            this.$emit('deletetodo', todo.id);
+        deletetodo: function (id) {
+            console.log(id)
+            this.$emit('deletetodo', id);
         }
     }
 }
@@ -40,6 +40,10 @@ export default {
         label p {
             display: inline;
             margin-left: 5px;
+        }
+
+        input:checked + label {
+            text-decoration: line-through;
         }
 
         .todoTrash {
